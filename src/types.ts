@@ -16,3 +16,14 @@ export interface CartItem {
   price: number
   quantity: number
 }
+
+export type OrderStatus = 'preparing' | 'ready' | 'delivered'
+
+export interface Order {
+  id: string
+  number: string
+  date: string
+  items: string
+  total: string
+  status: OrderStatus
+}
