@@ -58,16 +58,16 @@ export function Orders({ orders }: OrdersProps) {
         {filters.map((filter) => (
           <button
             key={filter}
+            type="button"
+            aria-pressed={activeFilter === filter}
             onClick={() => setActiveFilter(filter)}
-            className={`flex items-center justify-center px-3.5 py-2 ${
-              activeFilter === filter
-                ? 'bg-primary'
-                : 'bg-transparent border-2 border-border-strong'
-            }`}
+            className={`flex items-center justify-center px-3.5 py-2 ${activeFilter === filter
+              ? 'bg-primary'
+              : 'bg-transparent border-2 border-border-strong'
+              }`}
           >
-            <span className={`text-xs font-bold tracking-[1px] ${
-              activeFilter === filter ? 'text-surface' : 'text-primary'
-            }`}>
+            <span className={`text-xs font-bold tracking-[1px] ${activeFilter === filter ? 'text-surface' : 'text-primary'
+              }`}>
               {filter}
             </span>
           </button>
