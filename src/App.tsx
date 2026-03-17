@@ -5,7 +5,8 @@ import { CategoryTabs } from './components/CategoryTabs'
 import { MenuSection } from './components/MenuSection'
 import { BottomNavigation } from './components/BottomNavigation'
 import { Cart } from './components/Cart'
-import type { MenuItem, CartItem } from './types'
+import { Orders } from './components/Orders'
+import type { MenuItem, CartItem, Order } from './types'
 import './App.css'
 
 const burgers: MenuItem[] = [
@@ -30,6 +31,13 @@ const navTabs = [
   { id: 'CART', icon: ShoppingCart, label: 'CART' },
   { id: 'ORDERS', icon: Receipt, label: 'ORDERS' },
   { id: 'PROFILE', icon: User, label: 'PROFILE' },
+]
+
+const sampleOrders: Order[] = [
+  { id: '1', number: '#1042', date: 'Today, 14:32', items: 'Smash Burger × 2, IPA Draft × 1', total: '$31.00', status: 'preparing' },
+  { id: '2', number: '#1038', date: 'Today, 13:15', items: 'Crispy Chicken × 1, House Lager × 2', total: '$25.50', status: 'ready' },
+  { id: '3', number: '#1031', date: 'Yesterday, 19:44', items: 'Double Stack × 1, Loaded Fries × 1', total: '$22.00', status: 'delivered' },
+  { id: '4', number: '#1024', date: 'Mar 15, 12:30', items: 'Smash Burger × 1, Pale Ale × 2', total: '$25.00', status: 'delivered' },
 ]
 
 const categories = ['ALL', 'BURGERS', 'BEERS', 'SIDES']
@@ -68,6 +76,12 @@ function App() {
             <MenuSection title="BEERS" items={beers} />
           </div>
         </>
+      )}
+
+      {activeTab === 'ORDERS' && (
+        <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px] flex flex-col gap-6">
+          <Orders orders={sampleOrders} />
+        </div>
       )}
 
       {activeTab === 'CART' && (
