@@ -4,7 +4,8 @@ import { Header } from './components/Header'
 import { CategoryTabs } from './components/CategoryTabs'
 import { MenuSection } from './components/MenuSection'
 import { BottomNavigation } from './components/BottomNavigation'
-import type { MenuItem } from './types'
+import { Cart } from './components/Cart'
+import type { MenuItem, CartItem } from './types'
 import './App.css'
 
 const burgers: MenuItem[] = [
@@ -18,7 +19,13 @@ const beers: MenuItem[] = [
   { id: '5', name: 'IPA DRAFT', description: 'Hoppy & aromatic, local craft IPA. 400ml', price: '$8' },
 ]
 
-const tabs = [
+const initialCart: CartItem[] = [
+  { id: '1', name: 'SMASH BURGER', price: 12, quantity: 2 },
+  { id: '4', name: 'HOUSE LAGER', price: 6, quantity: 1 },
+  { id: '5', name: 'IPA DRAFT', price: 7, quantity: 1 },
+]
+
+const navTabs = [
   { id: 'MENU', icon: Utensils, label: 'MENU' },
   { id: 'CART', icon: ShoppingCart, label: 'CART' },
   { id: 'ORDERS', icon: Receipt, label: 'ORDERS' },
@@ -30,23 +37,51 @@ const categories = ['ALL', 'BURGERS', 'BEERS', 'SIDES']
 function App() {
   const [activeCategory, setActiveCategory] = useState('ALL')
   const [activeTab, setActiveTab] = useState('MENU')
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCart)
+
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+
+  function handleUpdateQuantity(id: string, delta: number) {
+    setCartItems(prev =>
+      prev
+        .map(item => item.id === id ? { ...item, quantity: item.quantity + delta } : item)
+        .filter(item => item.quantity > 0)
+    )
+  }
+
+  function handleClearCart() {
+    setCartItems([])
+  }
 
   return (
     <div className="relative flex flex-col h-dvh bg-surface overflow-hidden">
-      <div className="fixed top-0 left-0 max-w-[402px] w-full bg-surface z-10 pt-6">
-        <div className="flex flex-col gap-6 px-6 pb-6">
-          <Header cartCount={0} />
-          <CategoryTabs categories={categories} active={activeCategory} onChange={setActiveCategory} />
-        </div>
-      </div>
+      {activeTab === 'MENU' && (
+        <>
+          <div className="fixed top-0 left-0 max-w-[402px] w-full bg-surface z-10 pt-6">
+            <div className="flex flex-col gap-6 px-6 pb-6">
+              <Header cartCount={cartCount} />
+              <CategoryTabs categories={categories} active={activeCategory} onChange={setActiveCategory} />
+            </div>
+          </div>
+          <div className="flex-1 overflow-y-auto px-6 pt-[166px] pb-[120px] flex flex-col gap-6">
+            <MenuSection title="BURGERS" items={burgers} />
+            <MenuSection title="BEERS" items={beers} />
+          </div>
+        </>
+      )}
 
-      <div className="flex-1 overflow-y-auto px-6 pt-[166px] pb-[120px] flex flex-col gap-6">
-        <MenuSection title="BURGERS" items={burgers} />
-        <MenuSection title="BEERS" items={beers} />
-      </div>
+      {activeTab === 'CART' && (
+        <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px] flex flex-col gap-6">
+          <Cart
+            items={cartItems}
+            onUpdateQuantity={handleUpdateQuantity}
+            onClear={handleClearCart}
+          />
+        </div>
+      )}
 
       <BottomNavigation
-        tabs={tabs}
+        tabs={navTabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />

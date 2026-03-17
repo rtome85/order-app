@@ -9,3 +9,10 @@ export interface Category {
   id: string
   label: string
 }
+
+export interface CartItem {
+  id: string
+  name: string
+  price: number
+  quantity: number
+}
