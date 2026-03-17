@@ -14,7 +14,7 @@ interface BottomNavigationProps {
 
 export function BottomNavigation({ tabs, activeTab, onTabChange }: BottomNavigationProps) {
   return (
-    <div className="w-full h-[92px] bg-[#F5F2ED] px-[21px] pt-3 pb-[21px] border-t border-[#D1CCC5]">
+    <div className="fixed bottom-0 left-0 w-full max-w-[402px] h-[92px] bg-[#F5F2ED] px-[21px] pt-3 pb-[21px] border-t border-[#D1CCC5]">
       <div className="flex w-full h-[62px] bg-white border-[3px] border-[#2D2A26] p-1">
         {tabs.map((tab) => {
           const Icon = tab.icon
