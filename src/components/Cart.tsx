@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { PlaceOrder } from './PlaceOrder'
 import type { CartItem } from '../types'
 
 interface CartProps {
@@ -30,6 +32,7 @@ function CartItemRow({ item, onUpdateQuantity }: { item: CartItem; onUpdateQuant
 }
 
 export function Cart({ items, onUpdateQuantity, onClear, deliveryFee = 2.5 }: CartProps) {
+  const [showPlaceOrder, setShowPlaceOrder] = useState(false)
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const total = subtotal + deliveryFee
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
@@ -71,10 +74,20 @@ export function Cart({ items, onUpdateQuantity, onClear, deliveryFee = 2.5 }: Ca
         </div>
       </div>
 
-      <button className="flex items-center justify-center gap-3 w-full h-[58px] bg-accent border-[3px] border-border-strong">
+      <button
+        onClick={() => setShowPlaceOrder(true)}
+        className="flex items-center justify-center gap-3 w-full h-[58px] bg-accent border-[3px] border-border-strong"
+      >
         <span className="text-lg font-extrabold text-white tracking-[1px]">PLACE ORDER</span>
         <ArrowRight className="w-[18px] h-[18px] text-white" />
       </button>
+
+      <PlaceOrder
+        open={showPlaceOrder}
+        onClose={() => setShowPlaceOrder(false)}
+        itemCount={itemCount}
+        total={total}
+      />
     </>
   )
 }
