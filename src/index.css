@@ -1,40 +1,52 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
+/* ============================================
+   ORDER APP — Design System Tokens
+   ============================================
+   All design decisions are centralized here.
+   Components use Tailwind classes that reference
+   these tokens (e.g. bg-surface, text-primary).
+   ============================================ */
+
 @theme {
-  --color-bg-primary: #F5F2ED;
-  --color-text-primary: #2D2A26;
-  --color-text-secondary: #5C5852;
-  --color-text-muted: #8C8780;
+  /* --- Colors: Backgrounds --- */
+  --color-surface: #F5F2ED;
+  --color-surface-card: #FFFFFF;
+  --color-surface-placeholder: #EBE8E3;
+
+  /* --- Colors: Text --- */
+  --color-primary: #2D2A26;
+  --color-secondary: #5C5852;
+  --color-muted: #8C8780;
+  --color-disabled: #B5B0A8;
+
+  /* --- Colors: Accent --- */
   --color-accent: #C4634E;
+
+  /* --- Colors: Border --- */
   --color-border: #D1CCC5;
-  --color-placeholder: #EBE8E3;
+  --color-border-strong: #2D2A26;
+
+  /* --- Typography --- */
   --font-sans: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* --- Sizing --- */
+  --spacing-app-max: 402px;
 }
 
 :root {
-  --text: #2D2A26;
-  --text-secondary: #5C5852;
-  --text-muted: #8C8780;
-  --bg: #F5F2ED;
-  --bg-white: #FFFFFF;
-  --border: #D1CCC5;
-  --accent: #C4634E;
-  --placeholder: #EBE8E3;
-  
-  --sans: 'DM Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
-
-  font: 16px/145% var(--sans);
-  color: var(--text);
-  background: var(--bg);
+  font: 16px/145% var(--font-sans);
+  color: var(--color-primary);
+  background: var(--color-surface);
 }
 
 #root {
   width: 100%;
-  max-width: 402px;
+  max-width: var(--spacing-app-max);
   margin: 0 auto;
   min-height: 100svh;
-  background: var(--bg);
+  background: var(--color-surface);
 }
 
 body {

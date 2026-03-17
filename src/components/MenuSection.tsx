@@ -9,7 +9,7 @@ interface MenuSectionProps {
 export function MenuSection({ title, items }: MenuSectionProps) {
   return (
     <>
-      <span className="text-sm font-bold text-[#8C8780] tracking-[2px]">{title}</span>
+      <span className="text-sm font-bold text-muted tracking-[2px]">{title}</span>
       <div className="flex flex-col gap-3">
         {items.map((item) => (
           <MenuItem key={item.id} item={item} />
