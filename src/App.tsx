@@ -32,7 +32,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('MENU')
 
   return (
-    <div className="relative flex flex-col h-[900px] bg-surface overflow-hidden">
+    <div className="relative flex flex-col h-dvh bg-surface overflow-hidden">
       <div className="fixed top-0 left-0 max-w-[402px] w-full bg-surface z-10 pt-6">
         <div className="flex flex-col gap-6 px-6 pb-6">
           <Header cartCount={0} />
