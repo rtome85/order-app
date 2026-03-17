@@ -35,6 +35,10 @@
   --spacing-app-max: 402px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   font: 16px/145% var(--font-sans);
   color: var(--color-primary);
