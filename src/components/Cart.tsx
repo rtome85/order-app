@@ -76,7 +76,7 @@ export function Cart({ items, onUpdateQuantity, onClear, deliveryFee = 2.5 }: Ca
 
       <button
         onClick={() => setShowPlaceOrder(true)}
-        className="flex items-center justify-center gap-3 w-full h-[58px] bg-accent border-[3px] border-border-strong"
+        className="flex items-center justify-center gap-3 w-full py-4 bg-accent border-[3px] border-border-strong"
       >
         <span className="text-lg font-extrabold text-white tracking-[1px]">PLACE ORDER</span>
         <ArrowRight className="w-[18px] h-[18px] text-white" />

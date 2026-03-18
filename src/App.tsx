@@ -6,6 +6,7 @@ import { MenuSection } from './components/MenuSection'
 import { BottomNavigation } from './components/BottomNavigation'
 import { Cart } from './components/Cart'
 import { Orders } from './components/Orders'
+import { Profile } from './components/Profile'
 import type { MenuItem, CartItem, Order } from './types'
 import './App.css'
 
@@ -81,6 +82,12 @@ function App() {
       {activeTab === 'ORDERS' && (
         <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px] flex flex-col gap-6">
           <Orders orders={sampleOrders} />
+        </div>
+      )}
+
+      {activeTab === 'PROFILE' && (
+        <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px] flex flex-col gap-6">
+          <Profile />
         </div>
       )}
 
