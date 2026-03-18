@@ -7,3 +7,11 @@ export interface SellerOrder {
   items: { name: string; quantity: number }[]
   status: SellerOrderStatus
 }
+
+export interface SellerMenuItem {
+  id: string
+  name: string
+  price: string
+  category: string
+  available: boolean
+}

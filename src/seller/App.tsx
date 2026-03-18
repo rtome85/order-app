@@ -4,7 +4,18 @@ import { StatsRow } from './components/StatsRow'
 import { FilterTabs, type FilterValue } from './components/FilterTabs'
 import { OrderList } from './components/OrderList'
 import { BottomNavigation } from './components/BottomNavigation'
-import type { SellerOrder } from './types'
+import { MenuItems } from './components/MenuItems'
+import { NewItemModal } from './components/NewItemModal'
+import { EditItemModal } from './components/EditItemModal'
+import type { SellerOrder, SellerMenuItem } from './types'
+
+const initialMenuItems: SellerMenuItem[] = [
+  { id: 'm1', name: 'Smash Burger', price: '$12.50', category: 'BURGERS', available: true },
+  { id: 'm2', name: 'BBQ Bacon Burger', price: '$14.00', category: 'BURGERS', available: true },
+  { id: 'm3', name: 'Craft IPA', price: '$6.50', category: 'BEER', available: true },
+  { id: 'm4', name: 'Veggie Wrap', price: '$10.00', category: 'SIDES', available: false },
+  { id: 'm5', name: 'Lager Beer', price: '$5.00', category: 'BEER', available: true },
+]
 
 const initialOrders: SellerOrder[] = [
   {
@@ -34,6 +45,22 @@ function App() {
   const [orders, setOrders] = useState<SellerOrder[]>(initialOrders)
   const [filter, setFilter] = useState<FilterValue>('ALL')
   const [activeTab, setActiveTab] = useState<'ORDERS' | 'MENU' | 'SETTINGS'>('ORDERS')
+  const [menuItems, setMenuItems] = useState<SellerMenuItem[]>(initialMenuItems)
+  const [menuCategory, setMenuCategory] = useState('ALL')
+  const [showNewItem, setShowNewItem] = useState(false)
+  const [editingItem, setEditingItem] = useState<SellerMenuItem | null>(null)
+
+  function handleSaveItem(item: Omit<SellerMenuItem, 'id'>) {
+    setMenuItems(prev => [...prev, { ...item, id: `m${Date.now()}` }])
+  }
+
+  function handleSaveEdit(updated: SellerMenuItem) {
+    setMenuItems(prev => prev.map(i => i.id === updated.id ? updated : i))
+  }
+
+  function handleDeleteItem(id: string) {
+    setMenuItems(prev => prev.filter(i => i.id !== id))
+  }
 
   const newCount = orders.filter(o => o.status === 'new').length
   const preparingCount = orders.filter(o => o.status === 'preparing').length
@@ -70,10 +97,29 @@ function App() {
       )}
 
       {activeTab === 'MENU' && (
-        <div className="flex-1 flex items-center justify-center">
-          <span className="text-muted text-sm">Menu management coming soon</span>
+        <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px]">
+          <MenuItems
+            items={menuItems}
+            activeCategory={menuCategory}
+            onCategoryChange={setMenuCategory}
+            onAddItem={() => setShowNewItem(true)}
+            onEditItem={setEditingItem}
+          />
         </div>
       )}
+
+      <NewItemModal
+        isOpen={showNewItem}
+        onClose={() => setShowNewItem(false)}
+        onSave={handleSaveItem}
+      />
+
+      <EditItemModal
+        item={editingItem}
+        onClose={() => setEditingItem(null)}
+        onSave={handleSaveEdit}
+        onDelete={handleDeleteItem}
+      />
 
       {activeTab === 'SETTINGS' && (
         <div className="flex-1 flex items-center justify-center">
