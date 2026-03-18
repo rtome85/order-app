@@ -78,7 +78,7 @@ export function PlaceOrder({ open, onClose, itemCount, total }: PlaceOrderProps)
         </div>
 
         {/* CTA */}
-        <button className="flex items-center justify-center gap-3 w-full h-[58px] bg-accent border-[3px] border-border-strong">
+        <button className="flex items-center justify-center gap-3 w-full py-4 bg-accent border-[3px] border-border-strong">
           <span className="text-lg font-extrabold text-white tracking-[1px]">CONFIRM &amp; PAY</span>
           <ArrowRight className="w-[18px] h-[18px] text-white" />
         </button>
