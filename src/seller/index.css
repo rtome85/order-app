@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  /* --- Colors: Backgrounds --- */
+  --color-surface: #F5F2ED;
+  --color-surface-card: #FFFFFF;
+  --color-surface-placeholder: #EBE8E3;
+
+  /* --- Colors: Text --- */
+  --color-primary: #2D2A26;
+  --color-secondary: #5C5852;
+  --color-muted: #8C8780;
+  --color-disabled: #B5B0A8;
+
+  /* --- Colors: Accent --- */
+  --color-accent: #C4634E;
+  --color-success: #4F6F4B;
+
+  /* --- Colors: Border --- */
+  --color-border: #D1CCC5;
+  --color-border-strong: #2D2A26;
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* --- Sizing --- */
+  --spacing-app-max: 402px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  font: 16px/145% var(--font-sans);
+  color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+#root {
+  width: 100%;
+  max-width: var(--spacing-app-max);
+  margin: 0 auto;
+  min-height: 100svh;
+  background: var(--color-surface);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
