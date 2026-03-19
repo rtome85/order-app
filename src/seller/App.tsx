@@ -7,6 +7,7 @@ import { BottomNavigation } from './components/BottomNavigation'
 import { MenuItems } from './components/MenuItems'
 import { NewItemModal } from './components/NewItemModal'
 import { EditItemModal } from './components/EditItemModal'
+import { Settings } from './components/Settings'
 import type { SellerOrder, SellerMenuItem } from './types'
 
 const initialMenuItems: SellerMenuItem[] = [
@@ -122,8 +123,8 @@ function App() {
       />
 
       {activeTab === 'SETTINGS' && (
-        <div className="flex-1 flex items-center justify-center">
-          <span className="text-muted text-sm">Settings coming soon</span>
+        <div className="flex-1 overflow-y-auto px-6 pt-6 pb-[120px]">
+          <Settings />
         </div>
       )}
 
